@@ -8,10 +8,13 @@ class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self.send_response(200)
-        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("Content-Type", "application/json; charset=utf-8")
         self.end_headers()
+
         self.wfile.write(
-            "TripMate AI API가 정상적으로 작동합니다.".encode("utf-8")
+            json.dumps({
+                "message": "TripMate AI API가 정상적으로 작동합니다."
+            }, ensure_ascii=False).encode("utf-8")
         )
 
     def do_POST(self):
@@ -73,13 +76,12 @@ class handler(BaseHTTPRequestHandler):
 한국어로 답변해주세요.
 """
 
-           response = client.models.generate_content(
-             model="gemini-3.6-flash",
-             contents=prompt
-           )
+            response = client.interactions.create(
+                model="gemini-3.6-flash",
+                input=prompt
+            )
 
-
-            result = response.text
+            result = response.output_text
 
             self.send_response(200)
             self.send_header(
@@ -95,7 +97,7 @@ class handler(BaseHTTPRequestHandler):
             )
 
         except Exception as e:
-            print("ERROR:", e)
+            print("ERROR:", repr(e))
 
             self.send_response(500)
             self.send_header(
