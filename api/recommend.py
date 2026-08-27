@@ -6,24 +6,22 @@ from openai import OpenAI
 
 class handler(BaseHTTPRequestHandler):
 
-    class handler(BaseHTTPRequestHandler):
-
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-Type", "text/plain; charset=utf-8")
         self.end_headers()
+
         self.wfile.write(
-            "TripMate AI API가 정상적으로 작동하고 있습니다.".encode("utf-8")
+            "TripMate AI API가 정상적으로 작동합니다.".encode("utf-8")
         )
 
     def do_POST(self):
-        # 기존 코드
-
         try:
-            # 요청 데이터 읽기
-            content_length = int(self.headers.get("Content-Length", 0))
-            body = self.rfile.read(content_length)
+            content_length = int(
+                self.headers.get("Content-Length", 0)
+            )
 
+            body = self.rfile.read(content_length)
             data = json.loads(body)
 
             destination = data.get("destination", "").strip()
@@ -33,7 +31,10 @@ class handler(BaseHTTPRequestHandler):
             # 빈 입력 확인
             if not destination or not duration or not style:
                 self.send_response(400)
-                self.send_header("Content-Type", "application/json")
+                self.send_header(
+                    "Content-Type",
+                    "application/json; charset=utf-8"
+                )
                 self.end_headers()
 
                 response = {
@@ -41,16 +42,22 @@ class handler(BaseHTTPRequestHandler):
                 }
 
                 self.wfile.write(
-                    json.dumps(response, ensure_ascii=False).encode("utf-8")
+                    json.dumps(
+                        response,
+                        ensure_ascii=False
+                    ).encode("utf-8")
                 )
                 return
 
-            # API 키 가져오기
+            # API 키 확인
             api_key = os.environ.get("OPENAI_API_KEY")
 
             if not api_key:
                 self.send_response(500)
-                self.send_header("Content-Type", "application/json")
+                self.send_header(
+                    "Content-Type",
+                    "application/json; charset=utf-8"
+                )
                 self.end_headers()
 
                 response = {
@@ -58,16 +65,18 @@ class handler(BaseHTTPRequestHandler):
                 }
 
                 self.wfile.write(
-                    json.dumps(response, ensure_ascii=False).encode("utf-8")
+                    json.dumps(
+                        response,
+                        ensure_ascii=False
+                    ).encode("utf-8")
                 )
                 return
 
-            # OpenAI 클라이언트
+            # OpenAI 연결
             client = OpenAI(api_key=api_key)
 
-            # AI에게 보낼 요청
             prompt = f"""
-당신은 친절한 여행 플래너입니다.
+당신은 친절한 AI 여행 플래너입니다.
 
 다음 정보를 바탕으로 여행 일정을 추천해주세요.
 
@@ -75,7 +84,7 @@ class handler(BaseHTTPRequestHandler):
 여행 기간: {duration}
 여행 스타일: {style}
 
-날짜별로 보기 쉽게 여행 일정을 작성해주세요.
+날짜별로 보기 쉽게 작성해주세요.
 각 날짜마다 추천 장소와 간단한 설명을 포함해주세요.
 너무 빡빡하지 않고 현실적인 일정으로 작성해주세요.
 한국어로 답변해주세요.
@@ -88,9 +97,12 @@ class handler(BaseHTTPRequestHandler):
 
             result = response.output_text
 
-            # 결과 반환
+            # 성공 응답
             self.send_response(200)
-            self.send_header("Content-Type", "application/json")
+            self.send_header(
+                "Content-Type",
+                "application/json; charset=utf-8"
+            )
             self.end_headers()
 
             output = {
@@ -98,13 +110,20 @@ class handler(BaseHTTPRequestHandler):
             }
 
             self.wfile.write(
-                json.dumps(output, ensure_ascii=False).encode("utf-8")
+                json.dumps(
+                    output,
+                    ensure_ascii=False
+                ).encode("utf-8")
             )
 
         except Exception as e:
+            print("ERROR:", e)
 
             self.send_response(500)
-            self.send_header("Content-Type", "application/json")
+            self.send_header(
+                "Content-Type",
+                "application/json; charset=utf-8"
+            )
             self.end_headers()
 
             output = {
@@ -112,5 +131,8 @@ class handler(BaseHTTPRequestHandler):
             }
 
             self.wfile.write(
-                json.dumps(output, ensure_ascii=False).encode("utf-8")
+                json.dumps(
+                    output,
+                    ensure_ascii=False
+                ).encode("utf-8")
             )
