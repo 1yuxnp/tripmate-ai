@@ -74,8 +74,8 @@ class handler(BaseHTTPRequestHandler):
 """
 
            response = client.models.generate_content(
-           model="gemini-3.6-flash",
-           contents=prompt
+             model="gemini-3.6-flash",
+             contents=prompt
            )
 
 
