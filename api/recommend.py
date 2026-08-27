@@ -73,10 +73,11 @@ class handler(BaseHTTPRequestHandler):
 한국어로 답변해주세요.
 """
 
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt
-            )
+           response = client.models.generate_content(
+           model="gemini-3.7-flash",
+           contents=prompt
+           )
+
 
             result = response.text
 
