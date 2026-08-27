@@ -1,0 +1,318 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f8fc;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* 메뉴 */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+
+nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4f46e5;
+}
+
+.menu {
+    display: flex;
+    gap: 25px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+}
+
+.menu a:hover {
+    color: #4f46e5;
+}
+
+
+/* 홈 */
+
+.hero {
+    min-height: 650px;
+    padding: 120px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #eef2ff,
+        #ffffff
+    );
+}
+
+.hero h1 {
+    font-size: 52px;
+    line-height: 1.25;
+    color: #1e1b4b;
+    margin-bottom: 25px;
+}
+
+.hero p {
+    font-size: 19px;
+    color: #666;
+    margin-bottom: 35px;
+}
+
+.main-button {
+    display: inline-block;
+
+    padding: 15px 30px;
+
+    background: #4f46e5;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.main-button:hover {
+    background: #3730a3;
+    transform: translateY(-2px);
+}
+
+
+/* 공통 섹션 */
+
+.section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    font-size: 34px;
+    margin-bottom: 15px;
+    color: #1e1b4b;
+}
+
+.section > p {
+    color: #666;
+}
+
+
+/* AI 추천 박스 */
+
+.recommend-box {
+    max-width: 600px;
+    margin: 40px auto 0;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    text-align: left;
+}
+
+.recommend-box label {
+    display: block;
+
+    margin-top: 20px;
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+.recommend-box input,
+.recommend-box textarea {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-family: inherit;
+}
+
+.recommend-box textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.recommend-box button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #4f46e5;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.recommend-box button:hover {
+    background: #3730a3;
+}
+
+
+/* AI 결과 */
+
+#result {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    min-height: 80px;
+
+    background: #f5f5ff;
+
+    border-radius: 12px;
+
+    color: #555;
+}
+
+
+/* 서비스 소개 */
+
+.about {
+    background: white;
+
+    max-width: none;
+}
+
+.about p {
+    max-width: 650px;
+    margin: 15px auto;
+}
+
+
+/* FAQ */
+
+.faq-item {
+    max-width: 700px;
+
+    margin: 20px auto;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    text-align: left;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item h3 {
+    margin-bottom: 8px;
+    color: #4f46e5;
+}
+
+
+/* 푸터 */
+
+footer {
+    padding: 30px;
+
+    background: #1e1b4b;
+
+    color: white;
+
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* 모바일 */
+
+@media (max-width: 700px) {
+
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .menu {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        min-height: 550px;
+        padding: 80px 20px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 70px 15px;
+    }
+
+    .section h2 {
+        font-size: 28px;
+    }
+
+    .recommend-box {
+        padding: 25px 20px;
+    }
+}
